@@ -22,4 +22,36 @@
       <PackageReference Include="Swashbuckle.AspNetCore" Version="10.3.1" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Dtos\" />
+      <Folder Include="UseCases\CollectionPoints\Commands\" />
+      <Folder Include="UseCases\CollectionPoints\Queries\" />
+      <Folder Include="UseCases\DetailRequests\Commands\" />
+      <Folder Include="UseCases\DetailRequests\Queries\" />
+      <Folder Include="UseCases\Gatherers\Commands\" />
+      <Folder Include="UseCases\Gatherers\Queries\" />
+      <Folder Include="UseCases\GatherersGrades\Commands\" />
+      <Folder Include="UseCases\GatherersGrades\Queries\" />
+      <Folder Include="UseCases\Grades\Commands\" />
+      <Folder Include="UseCases\Grades\Queries\" />
+      <Folder Include="UseCases\HistoryRequests\Commands\" />
+      <Folder Include="UseCases\HistoryRequests\Queries\" />
+      <Folder Include="UseCases\Indicators\Commands\" />
+      <Folder Include="UseCases\Indicators\Queries\" />
+      <Folder Include="UseCases\Organizations\Commands\" />
+      <Folder Include="UseCases\Organizations\Queries\" />
+      <Folder Include="UseCases\CollectRequests\Commands\" />
+      <Folder Include="UseCases\CollectRequests\Queries\" />
+      <Folder Include="UseCases\RecoveredMaterials\Commands\" />
+      <Folder Include="UseCases\RecoveredMaterials\Queries\" />
+      <Folder Include="UseCases\ResidueTypes\Commands\" />
+      <Folder Include="UseCases\ResidueTypes\Queries\" />
+      <Folder Include="UseCases\PickupServices\Commands\" />
+      <Folder Include="UseCases\PickupServices\Queries\" />
+      <Folder Include="UseCases\Ubications\Commands\" />
+      <Folder Include="UseCases\Ubications\Queries\" />
+      <Folder Include="UseCases\Users\Commands\" />
+      <Folder Include="UseCases\Users\Queries\" />
+    </ItemGroup>
+
 </Project>

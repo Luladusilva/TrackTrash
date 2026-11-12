@@ -1,0 +1,15 @@
+C:\Users\harte\Documents\TECSUP\DAEA\TrackTrashAPI\TrackTrash.Application\bin\Debug\net10.0\TrackTrash.Application.deps.json
+C:\Users\harte\Documents\TECSUP\DAEA\TrackTrashAPI\TrackTrash.Application\bin\Debug\net10.0\TrackTrash.Application.runtimeconfig.json
+C:\Users\harte\Documents\TECSUP\DAEA\TrackTrashAPI\TrackTrash.Application\bin\Debug\net10.0\TrackTrash.Application.dll
+C:\Users\harte\Documents\TECSUP\DAEA\TrackTrashAPI\TrackTrash.Application\bin\Debug\net10.0\TrackTrash.Application.pdb
+C:\Users\harte\Documents\TECSUP\DAEA\TrackTrashAPI\TrackTrash.Application\obj\Debug\net10.0\TrackTrash.Application.csproj.AssemblyReference.cache
+C:\Users\harte\Documents\TECSUP\DAEA\TrackTrashAPI\TrackTrash.Application\obj\Debug\net10.0\TrackTrash.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\harte\Documents\TECSUP\DAEA\TrackTrashAPI\TrackTrash.Application\obj\Debug\net10.0\TrackTrash.Application.AssemblyInfoInputs.cache
+C:\Users\harte\Documents\TECSUP\DAEA\TrackTrashAPI\TrackTrash.Application\obj\Debug\net10.0\TrackTrash.Application.AssemblyInfo.cs
+C:\Users\harte\Documents\TECSUP\DAEA\TrackTrashAPI\TrackTrash.Application\obj\Debug\net10.0\TrackTrash.Application.csproj.CoreCompileInputs.cache
+C:\Users\harte\Documents\TECSUP\DAEA\TrackTrashAPI\TrackTrash.Application\obj\Debug\net10.0\TrackTrash.Application.sourcelink.json
+C:\Users\harte\Documents\TECSUP\DAEA\TrackTrashAPI\TrackTrash.Application\obj\Debug\net10.0\TrackTrash.Application.dll
+C:\Users\harte\Documents\TECSUP\DAEA\TrackTrashAPI\TrackTrash.Application\obj\Debug\net10.0\refint\TrackTrash.Application.dll
+C:\Users\harte\Documents\TECSUP\DAEA\TrackTrashAPI\TrackTrash.Application\obj\Debug\net10.0\TrackTrash.Application.pdb
+C:\Users\harte\Documents\TECSUP\DAEA\TrackTrashAPI\TrackTrash.Application\obj\Debug\net10.0\TrackTrash.Application.genruntimeconfig.cache
+C:\Users\harte\Documents\TECSUP\DAEA\TrackTrashAPI\TrackTrash.Application\obj\Debug\net10.0\ref\TrackTrash.Application.dll

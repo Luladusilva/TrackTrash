@@ -17,39 +17,39 @@ public partial class TrackTrashDBContext : DbContext
     {
     }
 
-    public virtual DbSet<Calificacion> Calificaciones { get; set; }
+    public virtual DbSet<Grade> Grades { get; set; }
 
-    public virtual DbSet<DetalleSolicitud> DetalleSolicituds { get; set; }
+    public virtual DbSet<DetailRequest> DetailRequests { get; set; }
 
-    public virtual DbSet<HistorialSolicitud> HistorialSolicituds { get; set; }
+    public virtual DbSet<HistoryRequest> HistoryRequests { get; set; }
 
-    public virtual DbSet<MaterialRecuperado> MaterialRecuperados { get; set; }
+    public virtual DbSet<RecoveredMaterial> RecoveredMaterials { get; set; }
 
-    public virtual DbSet<Organizacion> Organizaciones { get; set; }
+    public virtual DbSet<Organization> Organizations { get; set; }
 
-    public virtual DbSet<PuntosAcopio> PuntosAcopios { get; set; }
+    public virtual DbSet<CollectionPoint> CollectionPoints { get; set; }
 
-    public virtual DbSet<Recolector> Recolectores { get; set; }
+    public virtual DbSet<Gatherer> Gatherers { get; set; }
 
-    public virtual DbSet<ServiciosRecojo> ServiciosRecojos { get; set; }
+    public virtual DbSet<PickupService> PickupServices { get; set; }
 
-    public virtual DbSet<SolicitudesRecojo> SolicitudesRecojos { get; set; }
+    public virtual DbSet<CollectRequest> CollectRequests { get; set; }
 
-    public virtual DbSet<TiposResiduo> TiposResiduos { get; set; }
+    public virtual DbSet<ResidueType> ResidueTypes { get; set; }
 
-    public virtual DbSet<Ubicacion> Ubicaciones { get; set; }
+    public virtual DbSet<Ubication> Ubications { get; set; }
 
-    public virtual DbSet<Usuario> Usuarios { get; set; }
+    public virtual DbSet<User> Users { get; set; }
 
-    public virtual DbSet<VwCalificacionesRecolectores> VwCalificacionesRecolectores { get; set; }
+    public virtual DbSet<GatherersGrades> GatherersGrades { get; set; }
 
-    public virtual DbSet<VwIndicadoresGenerales> VwIndicadoresGenerales { get; set; }
+    public virtual DbSet<Indicators> Indicators { get; set; }
 
-    public virtual DbSet<VwResiduosPorTipo> VwResiduosPorTipos { get; set; }
+    public virtual DbSet<ResiduesByType> ResiduesByType { get; set; }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Calificacion>(entity =>
+        modelBuilder.Entity<Grade>(entity =>
         {
             entity.HasKey(e => e.CalificacionId).HasName("calificaciones_pkey");
 
@@ -79,7 +79,7 @@ public partial class TrackTrashDBContext : DbContext
                 .HasConstraintName("calificaciones_usuario_id_fkey");
         });
 
-        modelBuilder.Entity<DetalleSolicitud>(entity =>
+        modelBuilder.Entity<DetailRequest>(entity =>
         {
             entity.HasKey(e => e.DetalleId).HasName("detalle_solicitud_pkey");
 
@@ -111,7 +111,7 @@ public partial class TrackTrashDBContext : DbContext
                 .HasConstraintName("detalle_solicitud_tipo_residuo_id_fkey");
         });
 
-        modelBuilder.Entity<HistorialSolicitud>(entity =>
+        modelBuilder.Entity<HistoryRequest>(entity =>
         {
             entity.HasKey(e => e.HistorialId).HasName("historial_solicitud_pkey");
 
@@ -144,7 +144,7 @@ public partial class TrackTrashDBContext : DbContext
                 .HasConstraintName("historial_solicitud_usuario_id_fkey");
         });
 
-        modelBuilder.Entity<MaterialRecuperado>(entity =>
+        modelBuilder.Entity<RecoveredMaterial>(entity =>
         {
             entity.HasKey(e => e.MaterialId).HasName("material_recuperado_pkey");
 
@@ -185,7 +185,7 @@ public partial class TrackTrashDBContext : DbContext
                 .HasConstraintName("material_recuperado_tipo_residuo_id_fkey");
         });
 
-        modelBuilder.Entity<Organizacion>(entity =>
+        modelBuilder.Entity<Organization>(entity =>
         {
             entity.HasKey(e => e.OrganizacionId).HasName("organizaciones_pkey");
 
@@ -225,12 +225,12 @@ public partial class TrackTrashDBContext : DbContext
                 .HasConstraintName("organizaciones_ubicacion_id_fkey");
 
             entity.HasOne(d => d.Usuario).WithOne(p => p.Organizacione)
-                .HasForeignKey<Organizacion>(d => d.UsuarioId)
+                .HasForeignKey<Organization>(d => d.UsuarioId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("organizaciones_usuario_id_fkey");
         });
 
-        modelBuilder.Entity<PuntosAcopio>(entity =>
+        modelBuilder.Entity<CollectionPoint>(entity =>
         {
             entity.HasKey(e => e.PuntoAcopioId).HasName("puntos_acopio_pkey");
 
@@ -268,11 +268,11 @@ public partial class TrackTrashDBContext : DbContext
             entity.HasMany(d => d.TipoResiduos).WithMany(p => p.PuntoAcopios)
                 .UsingEntity<Dictionary<string, object>>(
                     "AcopioTipoResiduo",
-                    r => r.HasOne<TiposResiduo>().WithMany()
+                    r => r.HasOne<ResidueType>().WithMany()
                         .HasForeignKey("TipoResiduoId")
                         .OnDelete(DeleteBehavior.ClientSetNull)
                         .HasConstraintName("acopio_tipo_residuo_tipo_residuo_id_fkey"),
-                    l => l.HasOne<PuntosAcopio>().WithMany()
+                    l => l.HasOne<CollectionPoint>().WithMany()
                         .HasForeignKey("PuntoAcopioId")
                         .HasConstraintName("acopio_tipo_residuo_punto_acopio_id_fkey"),
                     j =>
@@ -284,7 +284,7 @@ public partial class TrackTrashDBContext : DbContext
                     });
         });
 
-        modelBuilder.Entity<Recolector>(entity =>
+        modelBuilder.Entity<Gatherer>(entity =>
         {
             entity.HasKey(e => e.RecolectorId).HasName("recolectores_pkey");
 
@@ -315,18 +315,18 @@ public partial class TrackTrashDBContext : DbContext
             entity.Property(e => e.UsuarioId).HasColumnName("usuario_id");
 
             entity.HasOne(d => d.Usuario).WithOne(p => p.Recolectore)
-                .HasForeignKey<Recolector>(d => d.UsuarioId)
+                .HasForeignKey<Gatherer>(d => d.UsuarioId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("recolectores_usuario_id_fkey");
 
             entity.HasMany(d => d.TipoResiduos).WithMany(p => p.Recolectors)
                 .UsingEntity<Dictionary<string, object>>(
                     "RecolectorResiduo",
-                    r => r.HasOne<TiposResiduo>().WithMany()
+                    r => r.HasOne<ResidueType>().WithMany()
                         .HasForeignKey("TipoResiduoId")
                         .OnDelete(DeleteBehavior.ClientSetNull)
                         .HasConstraintName("recolector_residuos_tipo_residuo_id_fkey"),
-                    l => l.HasOne<Recolector>().WithMany()
+                    l => l.HasOne<Gatherer>().WithMany()
                         .HasForeignKey("RecolectorId")
                         .HasConstraintName("recolector_residuos_recolector_id_fkey"),
                     j =>
@@ -338,7 +338,7 @@ public partial class TrackTrashDBContext : DbContext
                     });
         });
 
-        modelBuilder.Entity<ServiciosRecojo>(entity =>
+        modelBuilder.Entity<PickupService>(entity =>
         {
             entity.HasKey(e => e.ServicioId).HasName("servicios_recojo_pkey");
 
@@ -376,12 +376,12 @@ public partial class TrackTrashDBContext : DbContext
                 .HasConstraintName("servicios_recojo_recolector_id_fkey");
 
             entity.HasOne(d => d.Solicitud).WithOne(p => p.ServiciosRecojo)
-                .HasForeignKey<ServiciosRecojo>(d => d.SolicitudId)
+                .HasForeignKey<PickupService>(d => d.SolicitudId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("servicios_recojo_solicitud_id_fkey");
         });
 
-        modelBuilder.Entity<SolicitudesRecojo>(entity =>
+        modelBuilder.Entity<CollectRequest>(entity =>
         {
             entity.HasKey(e => e.SolicitudId).HasName("solicitudes_recojo_pkey");
 
@@ -430,7 +430,7 @@ public partial class TrackTrashDBContext : DbContext
                 .HasConstraintName("solicitudes_recojo_usuario_id_fkey");
         });
 
-        modelBuilder.Entity<TiposResiduo>(entity =>
+        modelBuilder.Entity<ResidueType>(entity =>
         {
             entity.HasKey(e => e.TipoResiduoId).HasName("tipos_residuo_pkey");
 
@@ -458,7 +458,7 @@ public partial class TrackTrashDBContext : DbContext
                 .HasColumnName("nombre");
         });
 
-        modelBuilder.Entity<Ubicacion>(entity =>
+        modelBuilder.Entity<Ubication>(entity =>
         {
             entity.HasKey(e => e.UbicacionId).HasName("ubicaciones_pkey");
 
@@ -497,7 +497,7 @@ public partial class TrackTrashDBContext : DbContext
                 .HasColumnName("referencia");
         });
 
-        modelBuilder.Entity<Usuario>(entity =>
+        modelBuilder.Entity<User>(entity =>
         {
             entity.HasKey(e => e.UsuarioId).HasName("usuarios_pkey");
 
@@ -545,7 +545,7 @@ public partial class TrackTrashDBContext : DbContext
                 .HasConstraintName("usuarios_ubicacion_id_fkey");
         });
 
-        modelBuilder.Entity<VwCalificacionesRecolectores>(entity =>
+        modelBuilder.Entity<GatherersGrades>(entity =>
         {
             entity
                 .HasNoKey()
@@ -562,7 +562,7 @@ public partial class TrackTrashDBContext : DbContext
             entity.Property(e => e.TotalCalificaciones).HasColumnName("total_calificaciones");
         });
 
-        modelBuilder.Entity<VwIndicadoresGenerales>(entity =>
+        modelBuilder.Entity<Indicators>(entity =>
         {
             entity
                 .HasNoKey()
@@ -577,7 +577,7 @@ public partial class TrackTrashDBContext : DbContext
             entity.Property(e => e.TotalUsuarios).HasColumnName("total_usuarios");
         });
 
-        modelBuilder.Entity<VwResiduosPorTipo>(entity =>
+        modelBuilder.Entity<ResiduesByType>(entity =>
         {
             entity
                 .HasNoKey()
