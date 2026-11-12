@@ -1,0 +1,15 @@
+C:\Users\harte\Documents\TECSUP\DAEA\TrackTrashAPI\TrackTrash.Domain\bin\Debug\net10.0\TrackTrash.Domain.deps.json
+C:\Users\harte\Documents\TECSUP\DAEA\TrackTrashAPI\TrackTrash.Domain\bin\Debug\net10.0\TrackTrash.Domain.dll
+C:\Users\harte\Documents\TECSUP\DAEA\TrackTrashAPI\TrackTrash.Domain\bin\Debug\net10.0\TrackTrash.Domain.pdb
+C:\Users\harte\Documents\TECSUP\DAEA\TrackTrashAPI\TrackTrash.Domain\obj\Debug\net10.0\TrackTrash.Domain.csproj.AssemblyReference.cache
+C:\Users\harte\Documents\TECSUP\DAEA\TrackTrashAPI\TrackTrash.Domain\obj\Debug\net10.0\TrackTrash.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\harte\Documents\TECSUP\DAEA\TrackTrashAPI\TrackTrash.Domain\obj\Debug\net10.0\TrackTrash.Domain.AssemblyInfoInputs.cache
+C:\Users\harte\Documents\TECSUP\DAEA\TrackTrashAPI\TrackTrash.Domain\obj\Debug\net10.0\TrackTrash.Domain.AssemblyInfo.cs
+C:\Users\harte\Documents\TECSUP\DAEA\TrackTrashAPI\TrackTrash.Domain\obj\Debug\net10.0\TrackTrash.Domain.csproj.CoreCompileInputs.cache
+C:\Users\harte\Documents\TECSUP\DAEA\TrackTrashAPI\TrackTrash.Domain\obj\Debug\net10.0\TrackTrash.Domain.sourcelink.json
+C:\Users\harte\Documents\TECSUP\DAEA\TrackTrashAPI\TrackTrash.Domain\obj\Debug\net10.0\TrackTrash.Domain.dll
+C:\Users\harte\Documents\TECSUP\DAEA\TrackTrashAPI\TrackTrash.Domain\obj\Debug\net10.0\refint\TrackTrash.Domain.dll
+C:\Users\harte\Documents\TECSUP\DAEA\TrackTrashAPI\TrackTrash.Domain\obj\Debug\net10.0\TrackTrash.Domain.pdb
+C:\Users\harte\Documents\TECSUP\DAEA\TrackTrashAPI\TrackTrash.Domain\obj\Debug\net10.0\ref\TrackTrash.Domain.dll
+C:\Users\harte\Documents\TECSUP\DAEA\TrackTrashAPI\TrackTrash.Domain\bin\Debug\net10.0\TrackTrash.Domain.runtimeconfig.json
+C:\Users\harte\Documents\TECSUP\DAEA\TrackTrashAPI\TrackTrash.Domain\obj\Debug\net10.0\TrackTrash.Domain.genruntimeconfig.cache
