@@ -1,33 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
+using TrackTrash.Domain.Enums;
 
 namespace TrackTrash.Domain.Entities;
 
 public partial class PickupService
 {
-    public long ServicioId { get; set; }
+    public long PickupServiceId { get; set; }
 
-    public long SolicitudId { get; set; }
+    public long CollectRequestId { get; set; }
 
-    public long RecolectorId { get; set; }
+    public long GathererId { get; set; }
 
-    public DateTime FechaAsignacion { get; set; }
+    public DateTime AssignedAt { get; set; }
 
-    public DateTime? FechaInicio { get; set; }
+    public DateTime? StartedAt { get; set; }
 
-    public DateTime? FechaFinalizacion { get; set; }
+    public DateTime? CompletedAt { get; set; }
 
-    public string Estado { get; set; } = null!;
+    public PickupServiceStatus StatusId { get; set; }
 
-    public decimal PorcentajeComision { get; set; }
+    public decimal CommissionPercentage { get; set; }
 
-    public string? Observaciones { get; set; }
+    public string? Observations { get; set; }
 
-    public virtual ICollection<Grade> Calificaciones { get; set; } = new List<Grade>();
+    public virtual CollectRequest CollectRequest { get; set; } = null!;
 
-    public virtual ICollection<RecoveredMaterial> MaterialRecuperados { get; set; } = new List<RecoveredMaterial>();
+    public virtual Gatherer Gatherer { get; set; } = null!;
 
-    public virtual Gatherer Recolector { get; set; } = null!;
+    public virtual ICollection<Grade> Grades { get; set; } = new List<Grade>();
 
-    public virtual CollectRequest Solicitud { get; set; } = null!;
+    public virtual ICollection<RecoveredMaterial> RecoveredMaterials { get; set; } = new List<RecoveredMaterial>();
 }

@@ -1,41 +1,42 @@
 ﻿using System;
 using System.Collections.Generic;
+using TrackTrash.Domain.Enums;
 
 namespace TrackTrash.Domain.Entities;
 
 public partial class User
 {
-    public long UsuarioId { get; set; }
+    public long UserId { get; set; }
 
-    public string Nombre { get; set; } = null!;
+    public string FirstName { get; set; } = null!;
 
-    public string Apellido { get; set; } = null!;
+    public string LastName { get; set; } = null!;
 
-    public string Correo { get; set; } = null!;
+    public string Email { get; set; } = null!;
 
-    public string? Telefono { get; set; }
+    public string? Phone { get; set; }
 
     public string PasswordHash { get; set; } = null!;
 
-    public string Rol { get; set; } = null!;
+    public UserRole RoleId { get; set; }
 
-    public long? UbicacionId { get; set; }
+    public long? LocationId { get; set; }
 
-    public bool Estado { get; set; }
+    public bool IsActive { get; set; }
 
-    public DateTime FechaRegistro { get; set; }
+    public DateTime CreatedAt { get; set; }
 
-    public DateTime FechaActualizacion { get; set; }
+    public DateTime UpdatedAt { get; set; }
 
-    public virtual ICollection<Grade> Calificaciones { get; set; } = new List<Grade>();
+    public virtual ICollection<CollectRequest> CollectRequests { get; set; } = new List<CollectRequest>();
 
-    public virtual ICollection<HistoryRequest> HistorialSolicituds { get; set; } = new List<HistoryRequest>();
+    public virtual Gatherer? Gatherer { get; set; }
 
-    public virtual Organization? Organizacione { get; set; }
+    public virtual ICollection<Grade> Grades { get; set; } = new List<Grade>();
 
-    public virtual Gatherer? Recolectore { get; set; }
+    public virtual Location? Location { get; set; }
 
-    public virtual ICollection<CollectRequest> SolicitudesRecojos { get; set; } = new List<CollectRequest>();
+    public virtual Organization? Organization { get; set; }
 
-    public virtual Ubication? Ubicacion { get; set; }
+    public virtual ICollection<RequestHistory> RequestHistories { get; set; } = new List<RequestHistory>();
 }

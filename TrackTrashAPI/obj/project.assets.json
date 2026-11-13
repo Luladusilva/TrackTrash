@@ -1041,6 +1041,23 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
+      "TrackTrash.Application/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "dependencies": {
+          "ClosedXML": "0.105.1",
+          "Microsoft.AspNetCore.Authentication.JwtBearer": "10.0.15",
+          "Microsoft.EntityFrameworkCore.InMemory": "10.0.15",
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "10.0.3",
+          "Swashbuckle.AspNetCore": "10.3.1"
+        },
+        "compile": {
+          "bin/placeholder/TrackTrash.Application.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/TrackTrash.Application.dll": {}
+        }
+      },
       "TrackTrash.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v10.0",
@@ -1069,6 +1086,7 @@
           "Npgsql.EntityFrameworkCore.PostgreSQL": "10.0.3",
           "Swashbuckle.AspNetCore": "10.3.1",
           "Swashbuckle.AspNetCore.SwaggerGen": "10.3.1",
+          "TrackTrash.Application": "1.0.0",
           "TrackTrash.Domain": "1.0.0"
         },
         "compile": {
@@ -3379,6 +3397,11 @@
         "system.io.packaging.nuspec",
         "useSharedDesignerContext.txt"
       ]
+    },
+    "TrackTrash.Application/1.0.0": {
+      "type": "project",
+      "path": "../TrackTrash.Application/TrackTrash.Application.csproj",
+      "msbuildProject": "../TrackTrash.Application/TrackTrash.Application.csproj"
     },
     "TrackTrash.Domain/1.0.0": {
       "type": "project",
