@@ -1,31 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
+using TrackTrash.Domain.Enums;
 
 namespace TrackTrash.Domain.Entities;
 
 public partial class ResidueType
 {
-    public long TipoResiduoId { get; set; }
+    public long ResidueTypeId { get; set; }
 
-    public string Nombre { get; set; } = null!;
+    public string Name { get; set; } = null!;
 
-    public string Categoria { get; set; } = null!;
+    public ResidueCategory ResidueCategoryId { get; set; }
 
-    public string? Descripcion { get; set; }
+    public string? Description { get; set; }
 
-    public bool EsReciclable { get; set; }
+    public bool IsRecyclable { get; set; }
 
-    public string? InstruccionesClasificacion { get; set; }
+    public string? ClassificationInstructions { get; set; }
 
-    public bool Estado { get; set; }
+    public bool IsActive { get; set; }
 
-    public DateTime FechaCreacion { get; set; }
+    public DateTime CreatedAt { get; set; }
 
-    public virtual ICollection<DetailRequest> DetalleSolicituds { get; set; } = new List<DetailRequest>();
+    public virtual ICollection<RecoveredMaterial> RecoveredMaterials { get; set; } = new List<RecoveredMaterial>();
 
-    public virtual ICollection<RecoveredMaterial> MaterialRecuperados { get; set; } = new List<RecoveredMaterial>();
+    public virtual ICollection<RequestDetail> RequestDetails { get; set; } = new List<RequestDetail>();
 
-    public virtual ICollection<CollectionPoint> PuntoAcopios { get; set; } = new List<CollectionPoint>();
+    public virtual ICollection<CollectionPoint> CollectionPoints { get; set; } = new List<CollectionPoint>();
 
-    public virtual ICollection<Gatherer> Recolectors { get; set; } = new List<Gatherer>();
+    public virtual ICollection<Gatherer> Gatherers { get; set; } = new List<Gatherer>();
 }

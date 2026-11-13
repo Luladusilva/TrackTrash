@@ -1,29 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
+using TrackTrash.Domain.Enums;
 
 namespace TrackTrash.Domain.Entities;
 
 public partial class Gatherer
 {
-    public long RecolectorId { get; set; }
+    public long GathererId { get; set; }
 
-    public long UsuarioId { get; set; }
+    public long UserId { get; set; }
 
-    public string Tipo { get; set; } = null!;
+    public GathererType GathererTypeId { get; set; }
 
-    public string? Descripcion { get; set; }
+    public string? Description { get; set; }
 
-    public string? DocumentoVerificacion { get; set; }
+    public string? VerificationDocument { get; set; }
 
-    public string EstadoVerificacion { get; set; } = null!;
+    public VerificationStatus VerificationStatusId { get; set; }
 
-    public bool Estado { get; set; }
+    public bool IsActive { get; set; }
 
-    public DateTime FechaRegistro { get; set; }
+    public DateTime CreatedAt { get; set; }
 
-    public virtual ICollection<PickupService> ServiciosRecojos { get; set; } = new List<PickupService>();
+    public virtual ICollection<GathererGrade> GathererGrades { get; set; } = new List<GathererGrade>();
 
-    public virtual User Usuario { get; set; } = null!;
+    public virtual ICollection<PickupService> PickupServices { get; set; } = new List<PickupService>();
 
-    public virtual ICollection<ResidueType> TipoResiduos { get; set; } = new List<ResidueType>();
+    public virtual User User { get; set; } = null!;
+
+    public virtual ICollection<ResidueType> ResidueTypes { get; set; } = new List<ResidueType>();
 }

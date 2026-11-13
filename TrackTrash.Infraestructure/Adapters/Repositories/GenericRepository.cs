@@ -1,6 +1,6 @@
 ﻿namespace TrackTrash.Infraestructure.Adapters.Repositories;
 
-public class IUbicationRepository
+public class GenericRepository
 {
     
 }

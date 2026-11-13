@@ -25,11 +25,11 @@
 
     <ItemGroup>
       <ProjectReference Include="..\TrackTrash.Domain\TrackTrash.Domain.csproj" />
+      <ProjectReference Include="..\TrackTrash.Application\TrackTrash.Application.csproj" />
     </ItemGroup>
 
     <ItemGroup>
       <Folder Include="Adapters\Middlewares\" />
-      <Folder Include="Configuration\" />
     </ItemGroup>
 
 </Project>

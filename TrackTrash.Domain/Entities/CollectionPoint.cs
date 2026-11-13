@@ -5,27 +5,27 @@ namespace TrackTrash.Domain.Entities;
 
 public partial class CollectionPoint
 {
-    public long PuntoAcopioId { get; set; }
+    public long CollectionPointId { get; set; }
 
-    public string Nombre { get; set; } = null!;
+    public string Name { get; set; } = null!;
 
-    public string? Responsable { get; set; }
+    public string? ManagerName { get; set; }
 
-    public string? Telefono { get; set; }
+    public string? Phone { get; set; }
 
-    public long UbicacionId { get; set; }
+    public long LocationId { get; set; }
 
-    public string? Horario { get; set; }
+    public string? OpeningHours { get; set; }
 
-    public string? Descripcion { get; set; }
+    public string? Description { get; set; }
 
-    public bool Estado { get; set; }
+    public bool IsActive { get; set; }
 
-    public DateTime FechaRegistro { get; set; }
+    public DateTime CreatedAt { get; set; }
 
-    public virtual ICollection<RecoveredMaterial> MaterialRecuperados { get; set; } = new List<RecoveredMaterial>();
+    public virtual Location Location { get; set; } = null!;
 
-    public virtual Ubication Ubicacion { get; set; } = null!;
+    public virtual ICollection<RecoveredMaterial> RecoveredMaterials { get; set; } = new List<RecoveredMaterial>();
 
-    public virtual ICollection<ResidueType> TipoResiduos { get; set; } = new List<ResidueType>();
+    public virtual ICollection<ResidueType> ResidueTypes { get; set; } = new List<ResidueType>();
 }

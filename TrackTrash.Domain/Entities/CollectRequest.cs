@@ -1,39 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
+using TrackTrash.Domain.Enums;
 
 namespace TrackTrash.Domain.Entities;
 
 public partial class CollectRequest
 {
-    public long SolicitudId { get; set; }
+    public long CollectRequestId { get; set; }
 
-    public long UsuarioId { get; set; }
+    public long UserId { get; set; }
 
-    public long? OrganizacionId { get; set; }
+    public long? OrganizationId { get; set; }
 
-    public long UbicacionId { get; set; }
+    public long LocationId { get; set; }
 
-    public DateTime FechaSolicitud { get; set; }
+    public DateTime RequestedAt { get; set; }
 
-    public DateOnly FechaProgramada { get; set; }
+    public DateOnly ScheduledDate { get; set; }
 
-    public TimeOnly HoraProgramada { get; set; }
+    public TimeOnly ScheduledTime { get; set; }
 
-    public string Estado { get; set; } = null!;
+    public CollectRequestStatus StatusId { get; set; }
 
-    public string? Observaciones { get; set; }
+    public string? Observations { get; set; }
 
-    public DateTime FechaActualizacion { get; set; }
+    public DateTime UpdatedAt { get; set; }
 
-    public virtual ICollection<DetailRequest> DetalleSolicituds { get; set; } = new List<DetailRequest>();
+    public virtual Location Location { get; set; } = null!;
 
-    public virtual ICollection<HistoryRequest> HistorialSolicituds { get; set; } = new List<HistoryRequest>();
+    public virtual Organization? Organization { get; set; }
 
-    public virtual Organization? Organizacion { get; set; }
+    public virtual PickupService? PickupService { get; set; }
 
-    public virtual PickupService? ServiciosRecojo { get; set; }
+    public virtual ICollection<RequestDetail> RequestDetails { get; set; } = new List<RequestDetail>();
 
-    public virtual Ubication Ubicacion { get; set; } = null!;
+    public virtual ICollection<RequestHistory> RequestHistories { get; set; } = new List<RequestHistory>();
 
-    public virtual User Usuario { get; set; } = null!;
+    public virtual User User { get; set; } = null!;
 }

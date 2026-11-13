@@ -1,29 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
+using TrackTrash.Domain.Enums;
 
 namespace TrackTrash.Domain.Entities;
 
 public partial class RecoveredMaterial
 {
-    public long MaterialId { get; set; }
+    public long RecoveredMaterialId { get; set; }
 
-    public long ServicioId { get; set; }
+    public long PickupServiceId { get; set; }
 
-    public long TipoResiduoId { get; set; }
+    public long ResidueTypeId { get; set; }
 
-    public decimal Cantidad { get; set; }
+    public decimal Quantity { get; set; }
 
-    public string Unidad { get; set; } = null!;
+    public MeasurementUnit UnitId { get; set; }
 
-    public long? PuntoAcopioId { get; set; }
+    public long? CollectionPointId { get; set; }
 
-    public DateTime FechaRegistro { get; set; }
+    public DateTime CreatedAt { get; set; }
 
-    public string? Observaciones { get; set; }
+    public string? Observations { get; set; }
 
-    public virtual CollectionPoint? PuntoAcopio { get; set; }
+    public virtual CollectionPoint? CollectionPoint { get; set; }
 
-    public virtual PickupService Servicio { get; set; } = null!;
+    public virtual PickupService PickupService { get; set; } = null!;
 
-    public virtual ResidueType TipoResiduo { get; set; } = null!;
+    public virtual ResidueType ResidueType { get; set; } = null!;
 }

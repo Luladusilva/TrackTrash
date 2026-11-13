@@ -1,6 +1,6 @@
 ﻿namespace TrackTrashAPI.Controllers;
 
-public class UbicationController
+public class LocationController
 {
     
 }

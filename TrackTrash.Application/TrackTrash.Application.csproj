@@ -23,8 +23,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Dtos\" />
-      <Folder Include="UseCases\CollectionPoints\Commands\" />
       <Folder Include="UseCases\CollectionPoints\Queries\" />
       <Folder Include="UseCases\DetailRequests\Commands\" />
       <Folder Include="UseCases\DetailRequests\Queries\" />
@@ -40,7 +38,6 @@
       <Folder Include="UseCases\Indicators\Queries\" />
       <Folder Include="UseCases\Organizations\Commands\" />
       <Folder Include="UseCases\Organizations\Queries\" />
-      <Folder Include="UseCases\CollectRequests\Commands\" />
       <Folder Include="UseCases\CollectRequests\Queries\" />
       <Folder Include="UseCases\RecoveredMaterials\Commands\" />
       <Folder Include="UseCases\RecoveredMaterials\Queries\" />

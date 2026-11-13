@@ -1210,6 +1210,23 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
+      "TrackTrash.Application/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "dependencies": {
+          "ClosedXML": "0.105.1",
+          "Microsoft.AspNetCore.Authentication.JwtBearer": "10.0.15",
+          "Microsoft.EntityFrameworkCore.InMemory": "10.0.15",
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "10.0.3",
+          "Swashbuckle.AspNetCore": "10.3.1"
+        },
+        "compile": {
+          "bin/placeholder/TrackTrash.Application.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/TrackTrash.Application.dll": {}
+        }
+      },
       "TrackTrash.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v10.0",
@@ -3839,6 +3856,11 @@
         "useSharedDesignerContext.txt"
       ]
     },
+    "TrackTrash.Application/1.0.0": {
+      "type": "project",
+      "path": "../TrackTrash.Application/TrackTrash.Application.csproj",
+      "msbuildProject": "../TrackTrash.Application/TrackTrash.Application.csproj"
+    },
     "TrackTrash.Domain/1.0.0": {
       "type": "project",
       "path": "../TrackTrash.Domain/TrackTrash.Domain.csproj",
@@ -3855,6 +3877,7 @@
       "Npgsql.EntityFrameworkCore.PostgreSQL >= 10.0.3",
       "Swashbuckle.AspNetCore >= 10.3.1",
       "Swashbuckle.AspNetCore.SwaggerGen >= 10.3.1",
+      "TrackTrash.Application >= 1.0.0",
       "TrackTrash.Domain >= 1.0.0"
     ]
   },
@@ -3884,6 +3907,9 @@
           "framework": "net10.0",
           "targetAlias": "net10.0",
           "projectReferences": {
+            "C:\\Users\\harte\\Documents\\TECSUP\\DAEA\\TrackTrashAPI\\TrackTrash.Application\\TrackTrash.Application.csproj": {
+              "projectPath": "C:\\Users\\harte\\Documents\\TECSUP\\DAEA\\TrackTrashAPI\\TrackTrash.Application\\TrackTrash.Application.csproj"
+            },
             "C:\\Users\\harte\\Documents\\TECSUP\\DAEA\\TrackTrashAPI\\TrackTrash.Domain\\TrackTrash.Domain.csproj": {
               "projectPath": "C:\\Users\\harte\\Documents\\TECSUP\\DAEA\\TrackTrashAPI\\TrackTrash.Domain\\TrackTrash.Domain.csproj"
             }
