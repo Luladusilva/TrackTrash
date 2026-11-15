@@ -1,5 +1,5 @@
-﻿namespace TrackTrash.Domain.Ports.Repositories;
-public class IIndicatorRepository
+namespace TrackTrash.Domain.Ports.Repositories;
+
+public interface IIndicatorRepository
 {
-    
 }

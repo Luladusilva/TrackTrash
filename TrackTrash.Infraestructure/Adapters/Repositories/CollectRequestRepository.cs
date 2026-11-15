@@ -1,6 +1,9 @@
-﻿namespace TrackTrash.Infraestructure.Adapters.Repositories;
+using TrackTrash.Domain.Entities;
+using TrackTrash.Domain.Ports.Repositories;
+using TrackTrash.Infraestructure.Context;
 
-public class CollectRequestRepository
+namespace TrackTrash.Infraestructure.Adapters.Repositories;
+
+public class CollectRequestRepository(TrackTrashDBContext context) : GenericRepository<CollectRequest>(context), ICollectRequestRepository
 {
-    
 }

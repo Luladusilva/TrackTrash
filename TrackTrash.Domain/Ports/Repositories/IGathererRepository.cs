@@ -1,5 +1,7 @@
-﻿namespace TrackTrash.Domain.Ports.Repositories;
-public class IGathererRepository
+using TrackTrash.Domain.Entities;
+
+namespace TrackTrash.Domain.Ports.Repositories;
+
+public interface IGathererRepository : IGenericRepository<Gatherer>
 {
-    
 }

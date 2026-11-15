@@ -1,6 +1,9 @@
-﻿namespace TrackTrash.Infraestructure.Adapters.Repositories;
+using TrackTrash.Domain.Ports.Repositories;
+using TrackTrash.Infraestructure.Context;
 
-public class IndicatorRepository
+namespace TrackTrash.Infraestructure.Adapters.Repositories;
+
+public class IndicatorRepository(TrackTrashDBContext context) : IIndicatorRepository
 {
-    
+    protected TrackTrashDBContext Context { get; } = context;
 }

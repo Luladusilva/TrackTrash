@@ -1,6 +1,7 @@
-﻿namespace TrackTrash.Infraestructure.Adapters.Services;
+using TrackTrash.Application.Ports.Services;
 
-public class XMLService
+namespace TrackTrash.Infraestructure.Adapters.Services;
+
+public class XMLService : IXMLService
 {
-    
 }

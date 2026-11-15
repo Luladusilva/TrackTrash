@@ -1,17 +1,28 @@
-using TrackTrash.Infraestructure.Context;
-using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
+using TrackTrash.Application.Configuration;
+using TrackTrash.Infraestructure.Configuration;
+using TrackTrashAPI.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddApplicationServices();
+builder.Services.AddInfrastructureServices(builder.Configuration);
+
+builder.Services
+    .AddControllers()
+    .AddJsonOptions(options =>
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+builder.Services.AddCors(options =>
+    options.AddDefaultPolicy(policy =>
+        policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
+
 var app = builder.Build();
 
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-
-builder.Services.AddDbContext<TrackTrashDBContext>(options =>
-    options.UseNpgsql(connectionString));
-
-app.UseExceptionHandler();
-app.UseStatusCodePages();
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 if (app.Environment.IsDevelopment())
 {
@@ -20,8 +31,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseAuthentication();
-app.UseAuthorization();
+app.UseCors();
 app.MapControllers();
 
 app.Run();

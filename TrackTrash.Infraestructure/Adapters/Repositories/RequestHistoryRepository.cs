@@ -1,6 +1,9 @@
-﻿namespace TrackTrash.Infraestructure.Adapters.Repositories;
+using TrackTrash.Domain.Entities;
+using TrackTrash.Domain.Ports.Repositories;
+using TrackTrash.Infraestructure.Context;
 
-public class RequestHistoryRepository
+namespace TrackTrash.Infraestructure.Adapters.Repositories;
+
+public class RequestHistoryRepository(TrackTrashDBContext context) : GenericRepository<RequestHistory>(context), IRequestHistoryRepository
 {
-    
 }
