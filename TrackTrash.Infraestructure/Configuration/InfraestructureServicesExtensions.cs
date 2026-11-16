@@ -1,6 +1,9 @@
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using TrackTrash.Application.Ports.Services;
 using TrackTrash.Domain.Ports.Repositories;
 using TrackTrash.Domain.Ports.UnitOfWork;
@@ -21,6 +24,16 @@ public static class InfraestructureServicesExtensions
         if (string.IsNullOrWhiteSpace(connectionString))
         {
             throw new InvalidOperationException("Connection string DefaultConnection is not configured.");
+        }
+
+        var jwtOptions = configuration
+            .GetSection("Jwt")
+            .Get<JwtOptions>() ?? throw new InvalidOperationException(
+                "JWT configuration is not configured.");
+
+        if (string.IsNullOrWhiteSpace(jwtOptions.Key))
+        {
+            throw new InvalidOperationException("JWT key is not configured.");
         }
 
         services.AddDbContext<TrackTrashDBContext>(options =>
@@ -45,6 +58,28 @@ public static class InfraestructureServicesExtensions
 
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<IXMLService, XMLService>();
+        services.AddScoped<IPasswordHashingService, PasswordHashingService>();
+        services.AddSingleton<ITokenService, JwtTokenService>();
+        services.AddSingleton(jwtOptions);
+
+        services
+            .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = jwtOptions.Issuer,
+                    ValidAudience = jwtOptions.Audience,
+                    IssuerSigningKey = new SymmetricSecurityKey(
+                        Encoding.UTF8.GetBytes(jwtOptions.Key))
+                };
+            });
+
+        services.AddAuthorization();
 
         return services;
     }
