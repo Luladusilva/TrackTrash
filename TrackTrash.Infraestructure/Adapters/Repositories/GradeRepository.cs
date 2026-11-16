@@ -1,6 +1,9 @@
-﻿namespace TrackTrash.Infraestructure.Adapters.Repositories;
+using TrackTrash.Domain.Entities;
+using TrackTrash.Domain.Ports.Repositories;
+using TrackTrash.Infraestructure.Context;
 
-public class GradeRepository
+namespace TrackTrash.Infraestructure.Adapters.Repositories;
+
+public class GradeRepository(TrackTrashDBContext context) : GenericRepository<Grade>(context), IGradeRepository
 {
-    
 }

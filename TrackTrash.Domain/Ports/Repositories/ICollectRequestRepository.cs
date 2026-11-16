@@ -1,5 +1,7 @@
-﻿namespace TrackTrash.Domain.Ports.Repositories;
-public class ICollectRequestRepository
+using TrackTrash.Domain.Entities;
+
+namespace TrackTrash.Domain.Ports.Repositories;
+
+public interface ICollectRequestRepository : IGenericRepository<CollectRequest>
 {
-    
 }

@@ -1,6 +1,9 @@
-﻿namespace TrackTrash.Infraestructure.Adapters.Repositories;
+using TrackTrash.Domain.Entities;
+using TrackTrash.Domain.Ports.Repositories;
+using TrackTrash.Infraestructure.Context;
 
-public class UserRepository
+namespace TrackTrash.Infraestructure.Adapters.Repositories;
+
+public class UserRepository(TrackTrashDBContext context) : GenericRepository<User>(context), IUserRepository
 {
-    
 }

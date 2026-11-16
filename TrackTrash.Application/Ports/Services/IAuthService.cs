@@ -1,6 +1,5 @@
-﻿namespace TrackTrash.Application.Ports.Services;
+namespace TrackTrash.Application.Ports.Services;
 
-public class IAuthService
+public interface IAuthService
 {
-    
 }
