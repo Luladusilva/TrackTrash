@@ -1,5 +1,7 @@
-﻿namespace TrackTrash.Domain.Ports.Repositories;
-public class IRecoveredMaterialRepository
+using TrackTrash.Domain.Entities;
+
+namespace TrackTrash.Domain.Ports.Repositories;
+
+public interface IRecoveredMaterialRepository : IGenericRepository<RecoveredMaterial>
 {
-    
 }

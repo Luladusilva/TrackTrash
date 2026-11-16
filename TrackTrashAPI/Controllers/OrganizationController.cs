@@ -1,6 +1,11 @@
-﻿namespace TrackTrashAPI.Controllers;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
 
-public class OrganizationController
+namespace TrackTrashAPI.Controllers;
+
+[ApiController]
+[Route("api/[controller]")]
+public class OrganizationController(ISender sender) : ControllerBase
 {
-    
+    private readonly ISender _sender = sender;
 }

@@ -1,6 +1,11 @@
-﻿namespace TrackTrashAPI.Controllers;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
 
-public class UserController
+namespace TrackTrashAPI.Controllers;
+
+[ApiController]
+[Route("api/[controller]")]
+public class UserController(ISender sender) : ControllerBase
 {
-    
+    private readonly ISender _sender = sender;
 }
