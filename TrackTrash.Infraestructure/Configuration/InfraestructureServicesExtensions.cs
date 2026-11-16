@@ -1,3 +1,6 @@
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using TrackTrash.Application.Ports.Services;
 using TrackTrash.Infraestructure.Adapters.UnitOfWork;
 //using TrackTrash.Infraestructure.Context;
@@ -26,6 +29,39 @@ public static class InfraestructureServicesExtensions
             throw new InvalidOperationException(
                 "Connection string 'DefaultConnection' is not configured.");
         }
+
+        var jwtOptions = configuration
+            .GetSection("Jwt")
+            .Get<JwtOptions>() ?? throw new InvalidOperationException(
+                "JWT configuration is not configured.");
+
+        if (string.IsNullOrWhiteSpace(jwtOptions.Key))
+        {
+            throw new InvalidOperationException("JWT key is not configured.");
+        }
+
+        services.AddSingleton(jwtOptions);
+        services.AddScoped<IPasswordHashingService, PasswordHashingService>();
+        services.AddSingleton<ITokenService, JwtTokenService>();
+
+        services
+            .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = jwtOptions.Issuer,
+                    ValidAudience = jwtOptions.Audience,
+                    IssuerSigningKey = new SymmetricSecurityKey(
+                        Encoding.UTF8.GetBytes(jwtOptions.Key))
+                };
+            });
+
+        services.AddAuthorization();
 
         //services.AddDbContext<TrackTrashDBContext>(options =>
         //    options.UseNpgsql(connectionString));

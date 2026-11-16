@@ -23,6 +23,10 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\TrackTrash.Domain\TrackTrash.Domain.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
       <Folder Include="UseCases\CollectionPoints\Queries\" />
       <Folder Include="UseCases\DetailRequests\Commands\" />
       <Folder Include="UseCases\DetailRequests\Queries\" />
