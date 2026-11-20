@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using Microsoft.OpenApi;
 using TrackTrash.Application.Configuration;
 using TrackTrash.Infraestructure.Configuration;
 using TrackTrashAPI.Middleware;
@@ -14,7 +15,21 @@ builder.Services
         options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Type = SecuritySchemeType.Http,
+        Scheme = "Bearer",
+        BearerFormat = "JWT",
+        Description = "Ingresa solo el token JWT."
+    });
+
+    options.AddSecurityRequirement(document => new OpenApiSecurityRequirement
+    {
+        [new OpenApiSecuritySchemeReference("Bearer", document)] = []
+    });
+});
 
 builder.Services.AddCors(options =>
     options.AddDefaultPolicy(policy =>
