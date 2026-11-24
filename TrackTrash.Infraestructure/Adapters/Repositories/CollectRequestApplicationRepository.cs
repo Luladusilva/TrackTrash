@@ -28,8 +28,7 @@ public sealed class CollectRequestApplicationRepository(TrackTrashDBContext cont
         long userId,
         CancellationToken cancellationToken = default) =>
         await Set.AsNoTracking()
-            .Include(x => x.CollectRequest).ThenInclude(x => x.Location)
-            .Include(x => x.CollectRequest).ThenInclude(x => x.RequestDetails).ThenInclude(x => x.ResidueType)
+            .Include(x => x.Gatherer).ThenInclude(x => x.User)
             .Where(x => x.Gatherer.UserId == userId)
             .OrderByDescending(x => x.AppliedAt)
             .ToListAsync(cancellationToken);

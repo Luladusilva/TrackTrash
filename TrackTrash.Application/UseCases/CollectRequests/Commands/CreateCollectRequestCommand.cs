@@ -29,7 +29,7 @@ public sealed record CreateCollectRequestDetailDto
     [Range(1, long.MaxValue)]
     public long ResidueTypeId { get; init; }
 
-    [Range(typeof(decimal), "0.01", "100000")]
+    [Range(typeof(decimal), "0.01", "100000", ParseLimitsInInvariantCulture = true)]
     public decimal EstimatedQuantity { get; init; }
 
     public MeasurementUnit UnitId { get; init; } = MeasurementUnit.Kg;
