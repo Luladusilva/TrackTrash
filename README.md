@@ -125,6 +125,7 @@ La API no crea administradores: se registra la cuenta y se cambia su `role_id` a
    | --- | --- |
    | `ConnectionStrings__DefaultConnection` | Cadena de conexión de PostgreSQL en formato Npgsql, con host, base de datos, usuario, contraseña y configuración TLS de Neon |
    | `Jwt__Key` | Secreto aleatorio de producción de al menos 32 bytes. La API requiere esta clave para arrancar |
+   | `Cors__AllowedOrigins` | Orígenes del web separados por coma (por ejemplo `https://tracktrash-web.pages.dev`). Fuera de `Development` solo ellos pueden llamar a la API desde el navegador |
 
 3. Pulsar **Deploy Web Service**. El contenedor escucha en el puerto que Render asigna mediante `PORT` (por defecto
    `10000`). Configurar **Health Check Path** con `/api/health`, que responde `{ "status": "ok" }` sin autenticación.
@@ -203,8 +204,8 @@ administrable para no requerir despliegues al agregar materiales.
 ## Pendientes conocidos
 
 Detalle y prioridades en los [hallazgos de integración](https://github.com/CarlosFloresDev/tracktrash-web/blob/main/docs/HALLAZGOS_BACKEND.md):
-las vistas de indicadores no están en el orden de instalación, CORS abierto a cualquier origen, puntos de acopio por
-material sin forma de cargarse y listas sin paginación.
+las vistas de indicadores no están en el orden de instalación, puntos de acopio por material sin forma de cargarse
+y listas sin paginación.
 
 ---
 
