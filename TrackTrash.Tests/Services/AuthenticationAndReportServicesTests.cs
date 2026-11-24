@@ -31,16 +31,18 @@ public class AuthenticationAndReportServicesTests
             Key = "TrackTrash-Test-Key-At-Least-32-Characters",
             Issuer = "TrackTrashAPI",
             Audience = "TrackTrashClient",
-            ExpirationMinutes = 60
+            AccessTokenExpirationHours = 4
         };
         var service = new JwtTokenService(options);
 
-        var token = service.GenerateToken(CreateUser());
+        var familyId = Guid.NewGuid();
+        var (token, expiresAt) = service.GenerateAccessToken(CreateUser(), familyId);
         var jwt = new JwtSecurityTokenHandler().ReadJwtToken(token);
 
         Assert.Equal(options.Issuer, jwt.Issuer);
         Assert.Contains(options.Audience, jwt.Audiences);
-        Assert.True(jwt.ValidTo > DateTime.UtcNow);
+        Assert.Contains(jwt.Claims, claim => claim.Type == "session_family" && claim.Value == familyId.ToString("D"));
+        Assert.InRange((expiresAt - DateTime.UtcNow).TotalMinutes, 239, 240);
     }
 
     [Fact]
