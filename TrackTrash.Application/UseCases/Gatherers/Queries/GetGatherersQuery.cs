@@ -10,7 +10,7 @@ internal sealed class GetGatherersQueryHandler(IUnitOfWork unitOfWork) : IReques
 {
     public async Task<IReadOnlyList<GathererDto>> Handle(GetGatherersQuery request, CancellationToken cancellationToken)
     {
-        var data = await unitOfWork.Gatherers.GetAllAsync(cancellationToken);
+        var data = await unitOfWork.Gatherers.GetAllProfilesAsync(cancellationToken);
         return data.Select(x => x.ToDto()).ToList();
     }
 }

@@ -9,6 +9,10 @@ public sealed record GathererDto
 
     public long UserId { get; init; }
 
+    public string FirstName { get; init; } = null!;
+
+    public string LastName { get; init; } = null!;
+
     public GathererType GathererTypeId { get; init; }
 
     public string? Description { get; init; }
@@ -20,6 +24,8 @@ public sealed record GathererDto
     public bool IsActive { get; init; }
 
     public DateTime CreatedAt { get; init; }
+
+    public IReadOnlyList<ResidueTypeDto> SupportedResidueTypes { get; init; } = [];
 }
 
 internal static class GathererDtoMapping
@@ -30,12 +36,15 @@ internal static class GathererDtoMapping
         {
             GathererId = entity.GathererId,
             UserId = entity.UserId,
+            FirstName = entity.User.FirstName,
+            LastName = entity.User.LastName,
             GathererTypeId = entity.GathererTypeId,
             Description = entity.Description,
             VerificationDocument = entity.VerificationDocument,
             VerificationStatusId = entity.VerificationStatusId,
             IsActive = entity.IsActive,
-            CreatedAt = entity.CreatedAt
+            CreatedAt = entity.CreatedAt,
+            SupportedResidueTypes = entity.ResidueTypes.Select(x => x.ToDto()).ToList()
         };
     }
 }

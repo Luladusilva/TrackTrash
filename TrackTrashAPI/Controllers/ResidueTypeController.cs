@@ -19,6 +19,7 @@ public class ResidueTypeController(ISender sender) : ControllerBase
     public async Task<ActionResult<ResidueTypeDto>> GetById(long id, CancellationToken cancellationToken) =>
         Ok(await sender.Send(new GetResidueTypeByIdQuery { ResidueTypeId = id }, cancellationToken));
 
+    [Authorize(Roles = "Admin")]
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     public async Task<ActionResult<long>> Create(CreateResidueTypeCommand command, CancellationToken cancellationToken)
@@ -27,6 +28,7 @@ public class ResidueTypeController(ISender sender) : ControllerBase
         return CreatedAtAction(nameof(GetById), new { id }, id);
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpPut("{id:long}")]
     public async Task<ActionResult<long>> Update(long id, UpdateResidueTypeCommand command, CancellationToken cancellationToken)
     {
@@ -34,6 +36,7 @@ public class ResidueTypeController(ISender sender) : ControllerBase
         return Ok(await sender.Send(command, cancellationToken));
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpDelete("{id:long}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     public async Task<IActionResult> Delete(long id, CancellationToken cancellationToken)

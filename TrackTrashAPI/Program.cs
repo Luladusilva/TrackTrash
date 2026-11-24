@@ -2,6 +2,7 @@ using System.Text.Json.Serialization;
 using Microsoft.OpenApi;
 using TrackTrash.Application.Configuration;
 using TrackTrash.Infraestructure.Configuration;
+using TrackTrashAPI.Swagger;
 using TrackTrashAPI.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +18,7 @@ builder.Services
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
+    options.OperationFilter<AllowAnonymousOperationFilter>();
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Type = SecuritySchemeType.Http,

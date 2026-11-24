@@ -11,6 +11,6 @@ internal sealed class LoginCommandHandler(IAuthService authService)
 {
     public Task<AuthResponseDto?> Handle(LoginCommand request, CancellationToken cancellationToken)
     {
-        return authService.LoginAsync(request.Login);
+        return authService.LoginAsync(request.Login, cancellationToken);
     }
 }

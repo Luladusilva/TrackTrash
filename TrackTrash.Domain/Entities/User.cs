@@ -39,4 +39,6 @@ public partial class User
     public virtual Organization? Organization { get; set; }
 
     public virtual ICollection<RequestHistory> RequestHistories { get; set; } = new List<RequestHistory>();
+
+    public virtual ICollection<RefreshToken> RefreshTokens { get; set; } = new List<RefreshToken>();
 }

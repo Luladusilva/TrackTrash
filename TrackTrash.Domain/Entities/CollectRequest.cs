@@ -36,5 +36,7 @@ public partial class CollectRequest
 
     public virtual ICollection<RequestHistory> RequestHistories { get; set; } = new List<RequestHistory>();
 
+    public virtual ICollection<CollectRequestApplication> Applications { get; set; } = new List<CollectRequestApplication>();
+
     public virtual User User { get; set; } = null!;
 }
