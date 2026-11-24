@@ -2,6 +2,7 @@ using System.Text.Json.Serialization;
 using Microsoft.OpenApi;
 using TrackTrash.Application.Configuration;
 using TrackTrash.Infraestructure.Configuration;
+using TrackTrashAPI.Health;
 using TrackTrashAPI.Swagger;
 using TrackTrashAPI.Middleware;
 
@@ -18,6 +19,12 @@ builder.Services
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "TrackTrash API",
+        Version = "v1",
+        Description = "API de TrackTrash: recojo de residuos reciclables en Arequipa. Usa POST /api/Auth/Login y pega el accessToken en Authorize."
+    });
     options.OperationFilter<AllowAnonymousOperationFilter>();
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
@@ -51,17 +58,21 @@ var app = builder.Build();
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 
-if (app.Environment.IsDevelopment())
+app.UseSwagger();
+app.UseSwaggerUI(options =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+    options.DocumentTitle = "TrackTrash API";
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "TrackTrash API v1");
+    options.EnablePersistAuthorization();
+    options.DisplayRequestDuration();
+});
 
 app.UseHttpsRedirection();
 app.UseCors();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
-app.MapGet("/api/health", () => Results.Ok(new { status = "ok" })).AllowAnonymous();
+app.MapGet("/", () => Results.Redirect("/swagger")).AllowAnonymous().ExcludeFromDescription();
+app.MapHealthEndpoint();
 
 app.Run();
