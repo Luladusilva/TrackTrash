@@ -45,6 +45,18 @@ Backend de TrackTrash: API ASP.NET Core (.NET 10) con arquitectura limpia, CQRS 
 
 Ejecutar siempre con `dotnet run` o el perfil del IDE. Si se lanza el `.exe` directamente, el entorno no es `Development`: no se carga `appsettings.Development.json` ni se publica Swagger.
 
+## Despliegue en Render
+
+1. Crea un **Web Service** conectado a este repositorio. Selecciona la rama `main`, el runtime **Docker** y deja vacío **Root Directory** para usar el `Dockerfile` de la raíz.
+2. En **Environment**, configura estas variables antes del primer despliegue.
+
+   | Variable | Valor |
+   | --- | --- |
+   | `ConnectionStrings__DefaultConnection` | Cadena de conexión de PostgreSQL en formato Npgsql, con host, base de datos, usuario, contraseña y configuración TLS de Neon. |
+   | `Jwt__Key` | Secreto aleatorio de producción de al menos 32 bytes. La API requiere esta clave para arrancar. |
+
+3. Pulsa **Deploy Web Service**. El contenedor escucha en el puerto que Render asigna mediante `PORT` y usa `10000` por defecto. Cuando el PR #17 esté integrado en la rama desplegada, configura **Health Check Path** con `/api/health`.
+
 ## Base de datos
 
 `database/01_schema.sql` se generó desde el modelo de EF Core (`dotnet ef dbcontext script`). Contiene las tablas, claves e índices. No contiene las tres vistas que usa el módulo de indicadores (`vw_gatherer_grades`, `vw_general_indicators`, `vw_residues_by_type`); su definición hay que agregarla desde la base de datos original.
