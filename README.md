@@ -76,6 +76,7 @@ Requisitos: .NET SDK 10 y PostgreSQL 15 o superior.
    psql -d tracktrash_db -f database/01_schema.sql
    psql -d tracktrash_db -f database/03_add_auth_and_applications.sql
    psql -d tracktrash_db -f database/04_seed_residue_types.sql
+   psql -d tracktrash_db -f database/05_indicator_views.sql
    ```
 
    | Script | Contenido |
@@ -84,10 +85,9 @@ Requisitos: .NET SDK 10 y PostgreSQL 15 o superior.
    | `02_align_neon_api.sql` | Alinea la base compartida en Neon: catálogos de estados y vistas de indicadores. Se niega a correr si ya hay solicitudes |
    | `03_add_auth_and_applications.sql` | Sesiones de refresh token y postulaciones de recolectores |
    | `04_seed_residue_types.sql` | Catálogo inicial de materiales para las categorías fijas `Recyclable`, `Organic` y `General` |
+   | `05_indicator_views.sql` | Crea o actualiza las tres vistas de indicadores en PostgreSQL |
 
-   Los indicadores (`/api/Indicator/*`) usan las vistas `vw_general_indicators`, `vw_residues_by_type` y
-   `vw_gatherer_grades`, que hoy solo están en `02_align_neon_api.sql`. En una base nueva hay que crearlas aparte;
-   si no, esos endpoints responden `500`.
+   En una base nueva, ejecuta los scripts 01, 03, 04 y 05 en ese orden. El script 02 corresponde a la alineación de catálogos de Neon.
 
    Los cambios de esquema van en scripts nuevos dentro de `database/`, nunca editando uno ya publicado.
 
@@ -203,7 +203,7 @@ administrable para no requerir despliegues al agregar materiales.
 ## Pendientes conocidos
 
 Detalle y prioridades en los [hallazgos de integración](https://github.com/CarlosFloresDev/tracktrash-web/blob/main/docs/HALLAZGOS_BACKEND.md):
-las vistas de indicadores no están en el orden de instalación, CORS abierto a cualquier origen, puntos de acopio por
+CORS abierto a cualquier origen, puntos de acopio por
 material sin forma de cargarse y listas sin paginación.
 
 ---
