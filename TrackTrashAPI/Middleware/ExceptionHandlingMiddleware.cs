@@ -17,6 +17,7 @@ public class ExceptionHandlingMiddleware(RequestDelegate next, ILogger<Exception
 
             var (statusCode, message) = exception switch
             {
+                Microsoft.EntityFrameworkCore.DbUpdateConcurrencyException => (StatusCodes.Status409Conflict, "The resource was updated by another request."),
                 KeyNotFoundException => (StatusCodes.Status404NotFound, exception.Message),
                 UnauthorizedAccessException => (StatusCodes.Status401Unauthorized, exception.Message),
                 InvalidOperationException { InnerException: null } => (StatusCodes.Status400BadRequest, exception.Message),
