@@ -39,6 +39,16 @@ internal sealed class ChangeCollectRequestStatusCommandHandler(IUnitOfWork unitO
             throw new KeyNotFoundException("User not found.");
         }
 
+        if (request.NewStatusId == CollectRequestStatus.Cancelled)
+        {
+            var pickup = await unitOfWork.PickupServices.GetByCollectRequestIdAsync(data.CollectRequestId, cancellationToken);
+            if (pickup?.StatusId is PickupServiceStatus.Pending or PickupServiceStatus.Assigned or PickupServiceStatus.InProgress)
+            {
+                pickup.StatusId = PickupServiceStatus.Cancelled;
+                unitOfWork.PickupServices.Update(pickup);
+            }
+        }
+
         await CollectRequestStatusRules.ApplyAsync(unitOfWork, data, request.NewStatusId, request.ChangedByUserId, request.Observations, cancellationToken);
         await unitOfWork.SaveChangesAsync(cancellationToken);
         return data.CollectRequestId;

@@ -9,7 +9,7 @@ public class PickupServiceRepository(TrackTrashDBContext context) : GenericRepos
 {
     public async Task<PickupService?> GetByCollectRequestIdAsync(long collectRequestId, CancellationToken cancellationToken = default)
     {
-        return await Set.AsNoTracking()
+        return await Set
             .SingleOrDefaultAsync(x => x.CollectRequestId == collectRequestId, cancellationToken);
     }
 

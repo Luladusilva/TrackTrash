@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using TrackTrash.Domain.Entities;
@@ -77,6 +77,7 @@ public partial class TrackTrashDBContext : DbContext
             entity.Property(e => e.ScheduledDate).HasColumnName("scheduled_date");
             entity.Property(e => e.ScheduledTime).HasColumnName("scheduled_time");
             entity.Property(e => e.StatusId)
+                .IsConcurrencyToken()
                 .HasConversion<short>()
                 .HasDefaultValue(CollectRequestStatus.Pending)
                 .HasColumnName("status_id");
@@ -377,6 +378,7 @@ public partial class TrackTrashDBContext : DbContext
             entity.Property(e => e.Observations).HasColumnName("observations");
             entity.Property(e => e.StartedAt).HasColumnName("started_at");
             entity.Property(e => e.StatusId)
+                .IsConcurrencyToken()
                 .HasConversion<short>()
                 .HasDefaultValue(PickupServiceStatus.Pending)
                 .HasColumnName("status_id");
