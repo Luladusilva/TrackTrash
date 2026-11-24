@@ -19,7 +19,8 @@ public class UnitOfWork(
     IRecoveredMaterialRepository recoveredMaterials,
     IGradeRepository grades,
     IGathererGradeRepository gathererGrades,
-    IIndicatorRepository indicators) : IUnitOfWork
+    IIndicatorRepository indicators,
+    ICollectRequestApplicationRepository collectRequestApplications) : IUnitOfWork
 {
     public IUserRepository Users { get; } = users;
 
@@ -48,6 +49,8 @@ public class UnitOfWork(
     public IGathererGradeRepository GathererGrades { get; } = gathererGrades;
 
     public IIndicatorRepository Indicators { get; } = indicators;
+
+    public ICollectRequestApplicationRepository CollectRequestApplications { get; } = collectRequestApplications;
 
     public Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {

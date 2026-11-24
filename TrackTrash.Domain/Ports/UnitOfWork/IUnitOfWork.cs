@@ -32,5 +32,7 @@ public interface IUnitOfWork
 
     IIndicatorRepository Indicators { get; }
 
+    ICollectRequestApplicationRepository CollectRequestApplications { get; }
+
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }

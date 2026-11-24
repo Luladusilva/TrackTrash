@@ -24,6 +24,7 @@ public class CollectionPointController(ISender sender) : ControllerBase
         Ok(await sender.Send(new GetActiveCollectionPointsByResidueTypeQuery { ResidueTypeId = value }, cancellationToken));
 
     [HttpPost]
+    [Authorize(Roles = "Admin")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     public async Task<ActionResult<long>> Create(CreateCollectionPointCommand command, CancellationToken cancellationToken)
     {
@@ -32,6 +33,7 @@ public class CollectionPointController(ISender sender) : ControllerBase
     }
 
     [HttpPut("{id:long}")]
+    [Authorize(Roles = "Admin")]
     public async Task<ActionResult<long>> Update(long id, UpdateCollectionPointCommand command, CancellationToken cancellationToken)
     {
         command.CollectionPointId = id;
@@ -39,6 +41,7 @@ public class CollectionPointController(ISender sender) : ControllerBase
     }
 
     [HttpDelete("{id:long}")]
+    [Authorize(Roles = "Admin")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     public async Task<IActionResult> Delete(long id, CancellationToken cancellationToken)
     {

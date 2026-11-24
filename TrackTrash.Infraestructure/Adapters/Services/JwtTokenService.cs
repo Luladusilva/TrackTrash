@@ -17,13 +17,16 @@ public class JwtTokenService : ITokenService
         _options = options;
     }
 
-    public string GenerateToken(User user)
+    public (string Token, DateTime ExpiresAt) GenerateAccessToken(User user, Guid sessionFamilyId)
     {
+        var expiresAt = DateTime.UtcNow.AddHours(_options.AccessTokenExpirationHours);
         var claims = new[]
         {
             new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()),
             new Claim(ClaimTypes.Email, user.Email),
-            new Claim(ClaimTypes.Role, user.RoleId.ToString())
+            new Claim(ClaimTypes.Role, user.RoleId.ToString()),
+            new Claim("session_family", sessionFamilyId.ToString("D")),
+            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString("N"))
         };
 
         var key = new SymmetricSecurityKey(
@@ -36,9 +39,9 @@ public class JwtTokenService : ITokenService
             issuer: _options.Issuer,
             audience: _options.Audience,
             claims: claims,
-            expires: DateTime.UtcNow.AddMinutes(_options.ExpirationMinutes),
+            expires: expiresAt,
             signingCredentials: credentials);
 
-        return new JwtSecurityTokenHandler().WriteToken(token);
+        return (new JwtSecurityTokenHandler().WriteToken(token), expiresAt);
     }
 }

@@ -9,4 +9,6 @@ public interface ICollectRequestRepository : IGenericRepository<CollectRequest>
     Task<IReadOnlyList<CollectRequest>> GetByUserIdAsync(long userId, CancellationToken cancellationToken = default);
 
     Task<IReadOnlyList<CollectRequest>> GetPendingAsync(CancellationToken cancellationToken = default);
+
+    Task<IReadOnlyList<CollectRequest>> GetPendingCompatibleWithResiduesAsync(IReadOnlyCollection<long> residueTypeIds, CancellationToken cancellationToken = default);
 }

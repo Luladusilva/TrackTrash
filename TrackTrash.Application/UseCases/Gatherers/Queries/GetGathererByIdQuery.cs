@@ -13,7 +13,7 @@ internal sealed class GetGathererByIdQueryHandler(IUnitOfWork unitOfWork) : IReq
 {
     public async Task<GathererDto> Handle(GetGathererByIdQuery request, CancellationToken cancellationToken)
     {
-        var data = await unitOfWork.Gatherers.GetByIdAsync(request.GathererId, cancellationToken)
+        var data = await unitOfWork.Gatherers.GetProfileByIdAsync(request.GathererId, cancellationToken)
                    ?? throw new KeyNotFoundException("Gatherer not found.");
 
         return data.ToDto();

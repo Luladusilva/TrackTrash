@@ -20,6 +20,7 @@ public class LocationController(ISender sender) : ControllerBase
         Ok(await sender.Send(new GetLocationByIdQuery { LocationId = id }, cancellationToken));
 
     [HttpPost]
+    [Authorize(Roles = "Admin,Generator,Organization")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     public async Task<ActionResult<long>> Create(CreateLocationCommand command, CancellationToken cancellationToken)
     {
@@ -27,6 +28,7 @@ public class LocationController(ISender sender) : ControllerBase
         return CreatedAtAction(nameof(GetById), new { id }, id);
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpPut("{id:long}")]
     public async Task<ActionResult<long>> Update(long id, UpdateLocationCommand command, CancellationToken cancellationToken)
     {
@@ -34,6 +36,7 @@ public class LocationController(ISender sender) : ControllerBase
         return Ok(await sender.Send(command, cancellationToken));
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpDelete("{id:long}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     public async Task<IActionResult> Delete(long id, CancellationToken cancellationToken)

@@ -34,4 +34,18 @@ public class CollectRequestRepository(TrackTrashDBContext context) : GenericRepo
             .OrderBy(x => x.ScheduledDate).ThenBy(x => x.ScheduledTime).ThenBy(x => x.CollectRequestId)
             .ToListAsync(cancellationToken);
     }
+
+    public async Task<IReadOnlyList<CollectRequest>> GetPendingCompatibleWithResiduesAsync(
+        IReadOnlyCollection<long> residueTypeIds,
+        CancellationToken cancellationToken = default)
+    {
+        var supportedIds = residueTypeIds.ToArray();
+        return await Set.AsNoTracking()
+            .Include(x => x.Location)
+            .Include(x => x.RequestDetails).ThenInclude(x => x.ResidueType)
+            .Where(x => x.StatusId == CollectRequestStatus.Pending && x.PickupService == null &&
+                        x.RequestDetails.Count > 0 && x.RequestDetails.All(detail => supportedIds.Contains(detail.ResidueTypeId)))
+            .OrderBy(x => x.ScheduledDate).ThenBy(x => x.ScheduledTime).ThenBy(x => x.CollectRequestId)
+            .ToListAsync(cancellationToken);
+    }
 }

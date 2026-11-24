@@ -2,13 +2,15 @@ namespace TrackTrash.Application.Dtos;
 
 public sealed record AuthResponseDto
 {
-    public required string Token { get; init; }
+    public required string AccessToken { get; init; }
 
-    public long UserId { get; init; }
+    public required string RefreshToken { get; init; }
 
-    public required string FullName { get; init; }
+    public required string TokenType { get; init; }
 
-    public required string Email { get; init; }
+    public DateTime ExpiresAt { get; init; }
 
-    public required string Role { get; init; }
+    public long ExpiresIn { get; init; }
+
+    public int RefreshAfterSeconds { get; init; } = 1800;
 }

@@ -26,6 +26,8 @@ public partial class Gatherer
 
     public virtual ICollection<PickupService> PickupServices { get; set; } = new List<PickupService>();
 
+    public virtual ICollection<CollectRequestApplication> Applications { get; set; } = new List<CollectRequestApplication>();
+
     public virtual User User { get; set; } = null!;
 
     public virtual ICollection<ResidueType> ResidueTypes { get; set; } = new List<ResidueType>();

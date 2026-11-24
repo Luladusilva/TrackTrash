@@ -7,7 +7,7 @@ using TrackTrash.Application.UseCases.Users.Queries;
 
 namespace TrackTrashAPI.Controllers;
 
-[Authorize]
+[Authorize(Roles = "Admin")]
 [ApiController]
 [Route("api/[controller]/[action]")]
 public class ReportController(ISender sender, IXMLService xmlService) : ControllerBase

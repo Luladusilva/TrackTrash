@@ -15,6 +15,8 @@ public partial class TrackTrashDBContext : DbContext
 
     public virtual DbSet<CollectRequest> CollectRequests { get; set; }
 
+    public virtual DbSet<CollectRequestApplication> CollectRequestApplications { get; set; }
+
     public virtual DbSet<CollectionPoint> CollectionPoints { get; set; }
 
     public virtual DbSet<Gatherer> Gatherers { get; set; }
@@ -38,6 +40,8 @@ public partial class TrackTrashDBContext : DbContext
     public virtual DbSet<ResidueType> ResidueTypes { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
+
+    public virtual DbSet<RefreshToken> RefreshTokens { get; set; }
 
     public virtual DbSet<VwGathererGrade> VwGathererGrades { get; set; }
 
