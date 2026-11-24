@@ -14,6 +14,7 @@
   <a href="#funcionalidades">Funcionalidades</a> ·
   <a href="#arquitectura">Arquitectura</a> ·
   <a href="#ejecutar-en-local">Ejecutar</a> ·
+  <a href="#despliegue-en-render">Despliegue</a> ·
   <a href="#autenticación">Autenticación</a> ·
   <a href="#permisos-por-rol">Permisos</a> ·
   <a href="#convenciones">Convenciones</a>
@@ -34,8 +35,8 @@ verificados. Este repositorio es la API que comparten la plataforma web y la app
 
 | Módulo | Qué resuelve |
 | --- | --- |
-| Autenticación | Login con JWT, refresh token rotativo con detección de reutilización, logout que revoca la sesión y `GET /api/User/me` |
-| Solicitudes | Un hogar u organización crea la solicitud con sus materiales (`details[]`) en una sola llamada y sigue su historial de estados |
+| Autenticación | Registro atómico de cuenta y perfil, login con JWT, refresh token rotativo con detección de reutilización, logout que revoca la sesión y `GET /api/User/me` |
+| Solicitudes | Un hogar u organización crea la solicitud con sus materiales (`details[]`) en una sola llamada y sigue su historial de estados; cancelarla cancela también su servicio activo |
 | Postulaciones | Los recolectores verificados se postulan; el solicitante acepta una (se crea el servicio) y las demás se rechazan |
 | Recolectores | Verificación de documentos, materiales que acepta cada recolector y búsqueda de recolectores compatibles por solicitud |
 | Servicios de recojo | Inicio, registro de material recuperado, finalización o cancelación, y calificación del servicio |
@@ -112,12 +113,30 @@ Requisitos: .NET SDK 10 y PostgreSQL 15 o superior.
 Ejecutar siempre con `dotnet run` o el perfil del IDE. Si se lanza el `.exe` directamente, el entorno no es
 `Development`: no se cargan los user-secrets ni se publica Swagger.
 
-La API no crea administradores: se registra la cuenta con `POST /api/User` y se cambia su `role_id` a `1` en la base.
+La API no crea administradores: se registra la cuenta y se cambia su `role_id` a `1` en la base.
+
+## Despliegue en Render
+
+1. Crear un **Web Service** conectado a este repositorio: rama `main`, runtime **Docker** y **Root Directory** vacío
+   para usar el `Dockerfile` de la raíz.
+2. En **Environment**, configurar estas variables antes del primer despliegue:
+
+   | Variable | Valor |
+   | --- | --- |
+   | `ConnectionStrings__DefaultConnection` | Cadena de conexión de PostgreSQL en formato Npgsql, con host, base de datos, usuario, contraseña y configuración TLS de Neon |
+   | `Jwt__Key` | Secreto aleatorio de producción de al menos 32 bytes. La API requiere esta clave para arrancar |
+
+3. Pulsar **Deploy Web Service**. El contenedor escucha en el puerto que Render asigna mediante `PORT` (por defecto
+   `10000`). Configurar **Health Check Path** con `/api/health`, que responde `{ "status": "ok" }` sin autenticación.
+
+Render vuelve a desplegar automáticamente con cada push o merge a `main`. En el plan gratuito el servicio se suspende
+tras unos minutos sin tráfico y la primera petición tarda en despertarlo.
 
 ## Autenticación
 
 | Endpoint | Cuerpo | Resultado |
 | --- | --- | --- |
+| `POST /api/Auth/Register` | Datos de la cuenta, `location` y, según el rol, `organization` o `gatherer` | Crea usuario, dirección y perfil en una transacción; devuelve el id |
 | `POST /api/Auth/Login` | `{ "email", "password" }` | `accessToken`, `refreshToken`, `tokenType`, `expiresAt`, `expiresIn`, `refreshAfterSeconds` (1800) |
 | `POST /api/Auth/Refresh` | `{ "refreshToken" }` | Un par nuevo; el refresh token anterior queda rotado |
 | `POST /api/Auth/Logout` | `{ "refreshToken" }` | Revoca la familia de refresh tokens de esa sesión |
@@ -127,7 +146,8 @@ La API no crea administradores: se registra la cuenta con `POST /api/User` y se 
 - Reutilizar un refresh token ya rotado revoca toda su familia.
 - Un access token vencido responde `401` con `code: "ACCESS_TOKEN_EXPIRED"`: el cliente renueva y reintenta.
 - `refreshAfterSeconds` indica el intervalo mínimo antes de renovar si el cliente sigue activo.
-- Todo exige `Authorization: Bearer <accessToken>` salvo login, refresh, logout y el registro (`POST /api/User`).
+- Todo exige `Authorization: Bearer <accessToken>` salvo registro (`POST /api/Auth/Register` y `POST /api/User`),
+  login, refresh, logout y `GET /api/health`.
   Los ids de usuario de cada operación salen del token y los cambios comprueban la propiedad del recurso.
 
 ## Permisos por rol
@@ -183,8 +203,8 @@ administrable para no requerir despliegues al agregar materiales.
 ## Pendientes conocidos
 
 Detalle y prioridades en los [hallazgos de integración](https://github.com/CarlosFloresDev/tracktrash-web/blob/main/docs/HALLAZGOS_BACKEND.md):
-las vistas de indicadores no están en el orden de instalación, cancelar una solicitud no cancela su servicio activo,
-CORS abierto, falta `GET /api/health` y falta el despliegue público.
+las vistas de indicadores no están en el orden de instalación, CORS abierto a cualquier origen, puntos de acopio por
+material sin forma de cargarse y listas sin paginación.
 
 ---
 

@@ -13,6 +13,14 @@ public class AuthController(ISender sender, IAuthService authService) : Controll
 {
     [AllowAnonymous]
     [HttpPost]
+    public async Task<IActionResult> Register(RegisterDto registration, CancellationToken cancellationToken)
+    {
+        var id = await sender.Send(new RegisterCommand(registration), cancellationToken);
+        return CreatedAtAction(nameof(UserController.GetById), "User", new { id }, id);
+    }
+
+    [AllowAnonymous]
+    [HttpPost]
     public async Task<IActionResult> Login(LoginDto login, CancellationToken cancellationToken)
     {
         var result = await sender.Send(new LoginCommand(login), cancellationToken);
